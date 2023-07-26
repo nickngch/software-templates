@@ -1,9 +1,9 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: gitlab-repo-template
+  name: gitlab-repo-argocd-template
   title: GitLab Repository Template
-  description: Creates a new GitLab repository from a template
+  description: Creates a new GitLab repository with ArgoCD from a template
 spec:
   owner: nickngch
   type: service
