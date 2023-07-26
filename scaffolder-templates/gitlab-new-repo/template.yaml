@@ -9,7 +9,7 @@ spec:
   type: service
 
   parameters:
-    - title: Fill in some steps
+    - title: Fill in basic information
       required:
         - name
       properties:
@@ -68,5 +68,3 @@ spec:
         targetPath: ${{ parameters.targetPath if parameters.targetPath else '.' }}
         token: ${{ secrets.USER_OAUTH_TOKEN }}
         commitAction: create
-        removeSourceBranch: true
-        assignee: ${{ parameters.assignee }}
