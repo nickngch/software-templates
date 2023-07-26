@@ -47,7 +47,7 @@ spec:
               secretsKey: USER_OAUTH_TOKEN
     - title: Kubernetes Resources
       properties:
-        volume_type:
+        resource_type:
           title: Resource Type
           type: string
           description: The Kubernetes resource to be created
@@ -59,6 +59,14 @@ spec:
             - 'Deployment'
             - 'Service'
             - 'Ingress'
+        namespace:
+          title: Kubernetes namespace
+          type: string
+          description: Kubernetes namespace of the resource
+          maxLength: 63
+          pattern: '^([a-zA-Z][a-zA-Z0-9]*)(-[a-zA-Z0-9]+)*$'
+          ui:autofocus: true
+          ui:help: 'Hint: additional description...'        
   steps:
     - id: template
       name: Fetch Skeleton + Template
@@ -81,3 +89,13 @@ spec:
         targetPath: ${{ parameters.targetPath if parameters.targetPath else '.' }}
         token: ${{ secrets.USER_OAUTH_TOKEN }}
         commitAction: create
+    - id: create-argocd-resources
+      name: Create ArgoCD Resources
+      action: argocd:create-resources
+      input:
+        appName: ${{ parameters.name }}-nonprod
+        argoInstance: ${{ parameters.argoinstance }}
+        namespace: ${{ parameters.namespace }}
+        repoUrl: ${{ steps.publish.output.remoteUrl }}
+        labelValue: ${{ parameters.name }}
+        path: "kubernetes/nonprod"
