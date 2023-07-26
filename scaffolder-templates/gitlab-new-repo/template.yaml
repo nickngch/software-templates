@@ -1,4 +1,4 @@
-apiVersion: backstage.io/v1beta2
+apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: gitlab-repo-template
@@ -7,7 +7,7 @@ metadata:
   tags:
     - gitlab
 spec:
-  type: website
+  type: service
   parameters:
     - name: name
       description: Unique name of the component
